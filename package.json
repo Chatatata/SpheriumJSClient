@@ -67,6 +67,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
     "superagent": "^3.4.1",
+    "ua-parser-js": "^0.7.12",
     "uuid": "^3.0.1"
   }
 }
