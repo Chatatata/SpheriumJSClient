@@ -1,4 +1,4 @@
-# spherium-js-client
+# SpheriumJSClient
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -17,9 +17,7 @@ npm i -D spherium-js-client
 ## Usage
 
 ```js
-import spheriumJsClient from "spherium-js-client"
-
-spheriumJsClient() // true
+import Spherium from 'spherium-js-client';
 ```
 
 ## License
