@@ -1,12 +1,12 @@
 import superagent from 'superagent';
-import _ from 'lodash';
 import uuid from 'uuid';
-import jwt from 'jsonwebtoken';
 import moment from 'moment';
 
+import {convertKeysToSnakeCase, convertKeysToCamelCase} from './util/case_conversions';
 import Passphrase from './models/passphrase';
 import JWT from './models/jwt';
 import AuthenticationManager from './managers/authentication_manager';
+import CompleteUser from './models/complete_user';
 
 const URL = {
   submitCredentials: 'http://localhost:4000/api/access_control/authentication',
@@ -16,14 +16,6 @@ const URL = {
 
 /* eslint-disable vars-on-top *//* eslint-disable no-var */
 export var globalState = {};
-
-export function convertKeysToCamelCase(object) {
-  return _.mapKeys(object, (value, key) => _.camelCase(key));
-}
-
-export function convertKeysToSnakeCase(object) {
-  return _.mapKeys(object, (value, key) => _.snakeCase(key));
-}
 
 /**
  * @param {string} username Represents user's username.
@@ -95,12 +87,17 @@ export async function renewToken(passkey) {
                  moment.unix(data.exp).toDate());
 }
 
-renewToken('SzMCEEv/SmuPGHeuomOIQEToadQl/kJnlhxn4PaH+9n8l+8mD6RBiZ+UXn+yiQUso9ENJ37RSaSQcq85Tla3lw==')
+renewToken(
+  'SzMCEEv/SmuPGHeuomOIQEToadQl/kJnlhxn4PaH+9n8l+8mD6RBiZ+UXn+yiQUso9ENJ37RSaSQcq85Tla3lw=='
+)
 .then(result => {
   AuthenticationManager.jwt = result;
 
-  return result.user.extend();
+  return CompleteUser.extend(result.user);
 })
 .then(res => {
-  console.log(res.body);
+  return res.getPermissionSet();
 })
+.then(res => {
+  console.log(res);
+});
