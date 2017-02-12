@@ -88,7 +88,7 @@ export async function renewToken(passkey) {
 }
 
 renewToken(
-  'SzMCEEv/SmuPGHeuomOIQEToadQl/kJnlhxn4PaH+9n8l+8mD6RBiZ+UXn+yiQUso9ENJ37RSaSQcq85Tla3lw=='
+  'vCHvysHnRNuefqEO215S5j/7+tl66E8erivtfVYv+xEAjBvKZE5P75xZAaE8OT0xaCNC2UVjQRm+OWt/OjO2RQ=='
 )
 .then(result => {
   AuthenticationManager.jwt = result;
@@ -99,5 +99,5 @@ renewToken(
   return res.getPermissionSet();
 })
 .then(res => {
-  console.log(res);
+  console.log(res.permissions);
 });

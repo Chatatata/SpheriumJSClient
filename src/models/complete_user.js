@@ -42,6 +42,6 @@ export default class CompleteUser extends AuthenticatedUser {
       .set('Authorization', AuthenticationManager.jwt.headerify())
       .set('Accept', 'application/json');
 
-    return result.body;
+    return result.body.data;
   }
 }
